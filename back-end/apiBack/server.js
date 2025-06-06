@@ -49,8 +49,14 @@ server.use("/api/entregas", rotasEntregas);
 server.use(express.static(path.join(__dirname, "../../front-end/dist")));
 
 server.get("*any", (req, res) => {
+  // Ignora rotas da API
+  if (req.originalUrl.startsWith("/api")) return res.sendStatus(404);
   res.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
 });
+
+// server.get("*any", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
+// });
 
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

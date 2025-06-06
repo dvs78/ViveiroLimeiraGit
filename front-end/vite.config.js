@@ -10,6 +10,7 @@ export default defineConfig({
 // export default defineConfig({
 //   root: "front-end",
 //   build: {
+//     target: "esnext", // para onde os arquivos serão exportados
 //     outDir: "../dist",
 //     emptyOutDir: true,
 //   },
