@@ -6,6 +6,11 @@ import {
 } from "../src/components/cartaoProduto.js";
 import { inicializarCarrinho } from "../src/components/menuCarrinho.js";
 
+import { initRouter } from "./router.js";
+
+// inicia o roteador ao carregar
+initRouter();
+
 // RENDERIZAR CATÁLOGO
 renderizarCatalogo(catalogo, containerCartoes);
 
