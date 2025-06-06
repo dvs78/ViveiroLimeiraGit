@@ -12,6 +12,8 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "deploy": "file:..",
+    "dotenv": "^16.5.0"
   }
 }

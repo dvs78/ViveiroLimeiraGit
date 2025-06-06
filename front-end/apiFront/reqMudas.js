@@ -1,11 +1,15 @@
 import { mostrarMensagem } from "../src/components/funcoesDiversas.js";
 
-const BASE_URL = "http://localhost:3000/mudas";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR PRODUÇÃO DE MUDAS
 export async function buscarProducaoMudas() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/mudas`);
 
     if (!response.ok) {
       throw new Error("Erro ao buscar mudas");
@@ -45,7 +49,7 @@ export async function cadastrarMudas(
   )
     return;
 
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}/mudas`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -83,7 +87,7 @@ export async function editarProducaoMudasBd(objeto) {
   // }
 
   try {
-    const response = await fetch(`${BASE_URL}/${await objeto.id}`, {
+    const response = await fetch(`${BASE_URL}/mudas/${await objeto.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +117,7 @@ export async function deletarProducaoMudas(objeto) {
   )
     return;
   try {
-    const response = await fetch(`${BASE_URL}/${objeto.id}`, {
+    const response = await fetch(`${BASE_URL}/mudas/${objeto.id}`, {
       method: "DELETE",
     });
 

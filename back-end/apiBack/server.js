@@ -20,14 +20,15 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-// import path from "path";
-// import { fileURLToPath } from "url";
-
 import rotasClientes from "../crud/rotas/rotasClientes.js";
 import rotasCarrinho from "../crud/rotas/rotasCarrinho.js";
 import rotasMudas from "../crud/rotas/rotasMudas.js";
 import rotasPedidos from "../crud/rotas/rotasPedidos.js";
 import rotasEntregas from "../crud/rotas/rotasEntregas.js";
+
+import path from "path";
+
+const __dirname = path.resolve();
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -39,17 +40,17 @@ export const PORT = 3000;
 server.use(cors());
 server.use(express.json());
 
-server.use("/carrinho", rotasCarrinho);
-server.use("/clientes", rotasClientes);
-server.use("/mudas", rotasMudas);
-server.use("/pedidos", rotasPedidos);
-server.use("/entregas", rotasEntregas);
+server.use("/api/carrinho", rotasCarrinho);
+server.use("/api/clientes", rotasClientes);
+server.use("/api/mudas", rotasMudas);
+server.use("/api/pedidos", rotasPedidos);
+server.use("/api/entregas", rotasEntregas);
 
-// server.use(express.static(path.join(__dirname, "../../front-end/dist")));
+server.use(express.static(path.join(__dirname, "../../front-end/dist")));
 
-// server.get("/*any", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
-// });
+server.get("*any", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
+});
 
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);

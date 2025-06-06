@@ -1,9 +1,13 @@
-const BASE_URL = "http://localhost:3000/carrinho";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR CARRINHO
 export async function buscarCarrinho() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/carrinho`);
 
     if (!response.ok) {
       throw new Error("Erro ao buscar carrinho");
@@ -44,7 +48,7 @@ export async function salvarCarrinho(
     precoMudaTotal,
   };
 
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}/carrinho`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -72,7 +76,7 @@ export async function salvarCarrinho(
 // EXCLUIR CARRINHO
 export async function deletarCarrinho() {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}/carrinho`, {
       method: "DELETE",
     });
 

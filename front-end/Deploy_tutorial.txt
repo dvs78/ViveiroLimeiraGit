@@ -253,9 +253,154 @@ git init, vai deixar os arquivos U
 cd back-end
 npm i
 cd .., para volta para pasta global
+git commit -m "Fazendo o 1 commit"
 git remote add origin https://github.com/dvs78/ViveiroLimeiraGit.git
 git branch -M main
 git push -u origin main
+
+
+13 PACKAGE.JSON global
+Criar o arquivo vite.config.js no fron-end, com o código abaixo:
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  build: {
+    target: "esnext", // para onde os arquivos serão exportados
+  },
+});
+Vai criar o arquivo a pasta dist com arquivo index.html e a pasta assets e arquivo js, css e png
+Tudo que vamos quere vai está na pasta dist e não src
+
+Na pasta global
+Digite no terminal
+npm init -y
+
+Alterar o script do package.json global:
+
+"name": "deploy",
+Passar o name para deploy, isso é extremamente importante!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+ "scripts": {
+    "build": "npm install --prefix back-end && npm install --prefix front-end && npm run build --prefix front-end",
+    "start": "npm run start --prefix back-end"
+  },
+
+Essas alterações é para instalar o node_modules no front e back e rodar o vite quando rodar o projeto
+
+Alterar o script do package.json do back-end:
+  "scripts": {
+    "start": "node ./apiBack/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+Alterar o script do package.json do front-end:
+No package.json do front-end dele está assim:
+ "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+
+
+Digite no terminal:
+npm run build
+npm run start
+
+14 ALTERAR ENDPOINT
+É necessário para não confundir com aquivos.js que terão o mesmo nome do endpoint
+Ex:
+
+const BASE_URL = "http://localhost:3000/api/carrinho";
+
+server.use("/api/carrinho", rotasCarrinho);
+server.use("/api/clientes", rotasClientes);
+server.use("/api/mudas", rotasMudas);
+server.use("/api/pedidos", rotasPedidos);
+server.use("/api/entregas", rotasEntregas);
+
+Na pasta fron-end criar um arquivo .env
+NODE_ENV=development
+
+Não entendi muito bem, mas se está em desenvolvimento vai fazer uma coisa, caso contrário usa outro endereço
+No front-end, digite no terminal:
+npm i dotenv
+
+Depois colocar em todos os arquivos da apiFront, na verdade que dependem disso const BASE_URL = "http://localhost:3000/api/carrinho";
+import "dotenv/config";
+
+const NODE_ENV = process.env.NODE_ENV;
+
+
+15 PASSO - CÓDIGO PARA MANDAR PAR INDEX.HTML
+Ir para pasta back-end, digite no terminal
+npm i path
+
+Na pasta back-end criar o arquivo test.js
+import path, { dirname } from "path";
+
+const __dirname = path.resolve();
+console.log(__dirname);
+
+E roda node ./test.js
+Vai dá a pasta que está executando: C:\Users\Daniel\Documents\Software\VIVEIRO_Limeira_2025_06\back-end>
+
+Depois colocar o arquivo test.js dentro de api e rodar: node .\api\test.js
+Vai dá a pasta que está executando: C:\Users\Daniel\Documents\Software\VIVEIRO_Limeira_2025_06\back-end>
+
+Pode recortar o conteúdo do arquivo test.js e colar no arquivo server.js
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+import rotasClientes from "../crud/rotas/rotasClientes.js";
+import rotasCarrinho from "../crud/rotas/rotasCarrinho.js";
+import rotasMudas from "../crud/rotas/rotasMudas.js";
+import rotasPedidos from "../crud/rotas/rotasPedidos.js";
+import rotasEntregas from "../crud/rotas/rotasEntregas.js";
+
+import path from "path";
+
+const __dirname = path.resolve();
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// console.log("__dirname", __dirname);
+
+const server = express();
+export const PORT = 3000;
+
+server.use(cors());
+server.use(express.json());
+
+server.use("/api/carrinho", rotasCarrinho);
+server.use("/api/clientes", rotasClientes);
+server.use("/api/mudas", rotasMudas);
+server.use("/api/pedidos", rotasPedidos);
+server.use("/api/entregas", rotasEntregas);
+
+server.use(express.static(path.join(__dirname, "../../front-end/dist")));
+
+server.get("*any", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
+});
+
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
+
+Ir para pasta global
+Agora rodar npm run build, precisa estar na pasta mãe
+Agora rodar npm run start, precisa estar na pasta mãe
+
+Rodar git add . , precisa estar na pasta mãe
+
+
+No deploy,
+Colocar
+Build Command npm run build
+Start Command npm run start
+Environment Variables não colocar nada
+
 
 
 

@@ -3,12 +3,16 @@ import {
   mostrarMensagem,
 } from "../src/components/funcoesDiversas";
 
-const BASE_URL = "http://localhost:3000/clientes";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR CLIENTES
 export async function buscarClientes() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/clientes`);
 
     if (!response.ok) {
       throw new Error("Erro ao buscar clientes");
@@ -58,7 +62,7 @@ export async function cadastrarClientes(
     )
   )
     return;
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}/clientes`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -99,7 +103,7 @@ export async function editarCliente(id, inputs) {
   };
 
   try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/clientes/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +139,7 @@ export async function deletarCliente(cliente) {
     return;
   document.getElementById(cliente.id).remove();
   try {
-    const response = await fetch(`${BASE_URL}/${cliente.id}`, {
+    const response = await fetch(`${BASE_URL}/clientes/${cliente.id}`, {
       method: "DELETE",
     });
 

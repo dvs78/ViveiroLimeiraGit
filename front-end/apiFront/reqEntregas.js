@@ -3,12 +3,16 @@ import {
   mostrarMensagem,
 } from "../src/components/funcoesDiversas.js";
 
-const BASE_URL = "http://localhost:3000/entregas";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR ENTREGAS
 export async function buscarEntregas() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/entregas`);
 
     if (!response.ok) {
       throw new Error("Erro ao buscar entregas");
@@ -24,7 +28,7 @@ export async function buscarEntregas() {
 // CADASTRAR ENTREGA
 export async function salvarEntregas(lista) {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}/entregas`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +49,7 @@ export async function salvarEntregas(lista) {
 
 export async function editarEntregas(objeto) {
   try {
-    const response = await fetch(`${BASE_URL}/${Number(objeto.id)}`, {
+    const response = await fetch(`${BASE_URL}/entregas/${Number(objeto.id)}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +81,7 @@ export async function excluirEntrega(lista, id) {
   if (!confirmado) return;
 
   try {
-    const response = await fetch(`${BASE_URL}/${id}`, {
+    const response = await fetch(`${BASE_URL}/entregas/${id}`, {
       method: "DELETE",
     });
 

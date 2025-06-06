@@ -1,11 +1,15 @@
 let mensagem = document.getElementById("mensagem-erro-clientes");
 
-const BASE_URL = "http://localhost:3000/clientes";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR CLIENTES
 export async function buscarClientes() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/clientes`);
     if (!response.ok) {
       throw new Error("Erro ao buscar clientes");
     }
@@ -20,7 +24,7 @@ export async function buscarClientes() {
 // ADICIONAR CLIENTE
 export async function cadastrarCliente(nome, sobrenome) {
   try {
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}/clientes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

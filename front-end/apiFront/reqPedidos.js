@@ -3,12 +3,16 @@ import {
   mostrarMensagem,
 } from "../src/components/funcoesDiversas.js";
 
-const BASE_URL = "http://localhost:3000/pedidos";
+import "dotenv/config";
+
+const { NODE_ENV } = process.env;
+const BASE_URL =
+  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR CLIENTES
 export async function buscarPedidos() {
   try {
-    const response = await fetch(BASE_URL);
+    const response = await fetch(`${BASE_URL}/pedidos`);
 
     if (!response.ok) {
       throw new Error("Erro ao buscar pedidos");
@@ -43,7 +47,7 @@ export async function salvarPedidos(
     precomudatotal,
   };
 
-  const response = await fetch(BASE_URL, {
+  const response = await fetch(`${BASE_URL}/pedidos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +71,7 @@ export async function editarPedidos(objeto) {
   const body = objeto;
   mostrarMensagem("Pedido atualizado com sucesso!");
   try {
-    const response = await fetch(`${BASE_URL}/${objeto.id}`, {
+    const response = await fetch(`${BASE_URL}/pedidos/${objeto.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +104,7 @@ export async function deletarPedido(objeto) {
     return;
 
   try {
-    const response = await fetch(`${BASE_URL}/${objeto.id}`, {
+    const response = await fetch(`${BASE_URL}/pedidos/${objeto.id}`, {
       method: "DELETE",
     });
 
