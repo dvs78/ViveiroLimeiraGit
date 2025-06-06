@@ -4,18 +4,17 @@ export default defineConfig({
   build: {
     target: "esnext", // para onde os arquivos serão exportados
   },
+  base: "/", // ✅ garante que as rotas comecem na raiz
 });
 
-// import { defineConfig } from 'vite';
-
 // export default defineConfig({
-//   root: 'front-end', // aponta para a pasta onde está o index.html
+//   root: "front-end",
 //   build: {
-//     outDir: '../dist', // a saída será na raiz do projeto, fora do front-end
-//     emptyOutDir: true, // limpa a pasta dist antes do build
-//     target: "esnext", // para onde os arquivos serão exportados
+//     outDir: "../dist",
+//     emptyOutDir: true,
 //   },
 //   server: {
-//     port: 5173, // opcional: define a porta ao rodar `vite dev`
+//     port: 5173,
 //   },
+//   base: "/", // ✅ garante que as rotas comecem na raiz
 // });
