@@ -1,10 +1,10 @@
 import { mostrarMensagem } from "../src/components/funcoesDiversas.js";
 
 import "dotenv/config";
-
-const { NODE_ENV } = process.env;
-const BASE_URL =
-  NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
+const BASE_URL = "https://viveirolimeiragit.onrender.com/api";
+// const { NODE_ENV } = process.env;
+// const BASE_URL =
+//   NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
 
 // BUSCAR PRODUÇÃO DE MUDAS
 export async function buscarProducaoMudas() {
