@@ -1,0 +1,344 @@
+NPM = NODE PACKET MANAGER
+Gerenciad                de pacotes do node
+
+1 PASSO - INSTALAR O VITE
+Digitar no terminal: npm create vite@latest .
+O espaço e ponto e para inidicar a criação do vite justamente na pasta em questão
+Digitar y
+React
+JavaScript
+
+Digitar no terminal: npm i
+É a mesma coisa de npm install, é abreviação, mas e para inidicar a criação dos pacotes (bibliotecas ou módulos) do node na pasta em questão, vai criar o arquivo node_modules
+Toda vez que digitar npm run dev, vai rodar o vite, é só olhar na pasta package.json em scripts
+Quando digitar npm run build, vai rodar o vite build, é só olhar na pasta package.json em scripts
+
+Digitar no terminal: npm run dev
+
+Excluir a pasta public
+Na pasta .gitignore deixar somente = node_modules
+
+2 PASSO - INSTALAR EXPRESS, CORS, PGADMIN
+npm install express cors pg
+express: framework para criar a API HTTP.
+cors: middleware que permite requisições entre front-end e back-end.
+pg: cliente PostgreSQL para Node.js.
+
+
+3 PASSO - CONECTAR O nodejs COM O BANCO pg admin
+Criar o código abaixo para conectar o nodejs com banco de dados
+Digitar no server.js:
+
+import pg from "pg";
+
+const pool = new pg.Pool({
+  host: "localhost",
+  port: 5432,
+  user: "postgres",
+  password: "Limao_10",
+  database: "ViveiroLimeira",
+});
+
+console.log((await pool.query("SELECT * FROM clientes")).rows);
+
+Rodar o node ./server.js e conferir se deu certo
+
+
+4 PASSO - CRIAR O ARQUIVO .env PARA DEIXAR OS DADOS DE CONEXÃO SEGUROS
+Criar as variáveis de ambiente
+São as variáveis que não serão compartilhadas com terceiros
+
+Criar arquivo .env
+Colocar no arquivo .env
+DB_HOST=localhost
+DB_PORT=5432
+DB_USER=postgres
+DB_PASSWORD=Limao_10
+DB_DATABASE=ViveiroLimeira
+
+Digitar no terminal npm install dotenv
+npm install dotenv = serve para ter acesso as variáveis de ambiente
+
+Colocar na server.js = import "dotenv/config"
+Versões mais novas não precisam do dotenv, não deu certo. Precisei instalar
+
+Alterar o arquivo server.js
+const pool = new pg.Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+});
+
+Rodar o node ./server.js e conferir se deu certo
+
+
+5 PASSO - CRIAR AS ESTRUTURAS DO CRUD
+Criar a pasta crud
+Dentro da pasta crud, criar a pasta dbOnLine, colocar as estruturas de acesso ao banco de dados
+Essa pasta vai guardar os códigos que fazem comunicação com banco de dados e terá tudo que for comunicação com banco de dados
+
+Criar o arquivo de acesso ao banco de dados
+Criar o arquivo db.js na pasta dbOnLine
+
+Recortar do server.js e colar no db.js
+
+import pg from "pg";
+
+const pool = new pg.Pool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+});
+
+export default pool
+
+No arquivo server.js colar
+import pool from "../crud/dbOnLine/db.js";
+
+
+6 PASSO - CRIAR A API
+Conectar o Express ao Banco de dados
+No arquivo server.js colar o código abaixo:
+import express from "express";
+
+const PORTA = 3000;
+const server = express();
+
+server.listen(PORTA, () => {
+  console.log(`API está online, na porta ${PORTA}!!!`);
+});
+
+
+7 PASSO - CRIAR A ROTA GET QUE IRÁ COMUNICAR O DB COM SERVIDOR
+app.get("/", async (req, res) => {
+  const result = (await pool.query("SELECT * FROM clientes")).rows;
+  res.status(200).send(result);
+});
+
+Rodar o comando dev = npm run dev
+
+
+8 PASSO
+Dentro da pasta dbOnLine, criar um arquivo DbClass.js
+As iniciais em maiúsculo, porque iremos criar uma classe nesse arquivo
+Esse arquivo terá as ações comuns para o banco de dados
+
+Colocar no arquivo DbClass.js o código abaixo:
+import pool from "./db.js";
+
+class DbClass {
+  async getAll(table) {
+    const results = (await pool.query(`SELECT * FROM ${table}`)).rows;
+    return results;
+  }
+}
+
+export default DbClass;
+
+Alterar o código no server:
+// CRIAR A ROTA GET QUE IRÁ COMUNICAR O DB COM SERVIDOR
+app.get("/clientes", async (req, res) => {
+  const result = await new DbClass().getAll("clientes");
+  res.status(200).send(result);
+});
+
+console.log((await pool.query("SELECT * FROM clientes")).rows);
+
+Rodar o node ./server.js e conferir se deu certo
+
+Deletar do server.js o código 
+import pool from "../crud/dbOnLine/db.js"
+
+
+9 PASSO - CRIAR O ARQUIVO DE ROTAS
+Criar a pasta rotas e arquivo rotasUsuarios.js
+Vamos criar a rota dos usuários
+
+import { Router } from "express";
+import DbClass from "../dbOnLine/DbClass.js";
+
+const rotas = Router();
+
+rotas.get("/", async (req, res) => {
+  const result = await new DbClass().getAll("clientes");
+  res.status(200).send(result);
+});
+
+export default rotas;
+
+O arquivo server.js, fica assim:
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+// import path from "path";
+// import { fileURLToPath } from "url";
+
+import rotasClientes from "../crud/rotas/rotasClientes.js";
+import rotasCarrinho from "../crud/rotas/rotasCarrinho.js";
+import rotasMudas from "../crud/rotas/rotasMudas.js";
+import rotasPedidos from "../crud/rotas/rotasPedidos.js";
+import rotasEntregas from "../crud/rotas/rotasEntregas.js";
+
+const server = express();
+const PORT = 3000;
+
+server.use(cors());
+server.use(express.json());
+
+server.use("/carrinho", rotasCarrinho);
+server.use("/clientes", rotasClientes);
+server.use("/mudas", rotasMudas);
+server.use("/pedidos", rotasPedidos);
+server.use("/entregas", rotasEntregas);
+
+server.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
+
+
+10 PASSO - CRIAR A PASTA FRONTEND e BACKEND
+Ir para ela: cd .\back-end\
+Digitar no terminal
+npm init -y
+
+
+11 PASSO - CONSTRUIR A API
+Instalar o express, cors, pg dotenv no back-end
+dotenv = serve para ter acesso as variáveis de ambiente
+Digitar no terminal
+npm i express cors pg dotenv
+
+Criar a pasta apiBack em backend
+Criar o arquivo server.js em apiBack
+Colocar no package.json, abaixo de description:
+ "type": "module",
+
+
+import express from "express";
+
+const app = express();
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Servidor está escutando na porta ${PORT}`);
+});
+
+Executar o arquivo server.json
+node .\apiBack\server.js
+Mas sempre que alterar o código, tem que matar o servidor e reiniciar novamente
+Para não ter que fazer isso tem que colocar watch
+node --watch .\api\server.js
+
+
+12 SUBIR PROJETO PARA O GITHUB
+Antes, no arquivo .gitignore, deve ficar assim:
+node_modules
+.env
+Copiar esse arquivo e colar no back-end
+
+Ir em new
+Colocar o nome do repositório, ex: ViveiroLimeiraGit
+Deixar em público
+Clicar em criar repositório
+
+Em or push an existing repository from the comnad line, copiar todos os códigos e rodar juntos
+Agora é ir para o VS Code 
+Abrir na pasta global
+Digite no terminal
+git init, vai deixar os arquivos U
+cd back-end
+npm i
+cd .., para volta para pasta global
+git remote add origin https://github.com/dvs78/ViveiroLimeiraGit.git
+git branch -M main
+git push -u origin main
+
+
+
+2 PASSO - RAFCE
+Instalar a extensão rafce = react arrow function components export
+Pesquisar: ES7+ React/Redux/React-Native snippets, instale a extensão de dsznajder
+
+
+3 PASSO - INSTALAR CÓDIGO DO FONT AWESOME React
+Ir no site, clicar em docs => view the docs => Integrations => React => Set Up with React
+
+Rolar para baixo até Add SVG Core e pegar o código e rodar no terminal
+npm i --save @fortawesome/fontawesome-svg-core
+
+Rolar mais para baixo até Add Icons Packages e pegar o código em Free SVG Icon Package e rodar no terminal tudo de uma vez só
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons
+npm i --save @fortawesome/free-brands-svg-icons
+
+Rolar mais para baixo até Add React Component e pegar o código e rodar no terminal
+npm i --save @fortawesome/react-fontawesome@latest
+
+E para instalar o ícnone precisa importar
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlay } from "@fortawesome/free-solid-svg-icons";
+
+
+4 PASSO - INSTALAR PACOTES DE PÁGINAS
+npm i react-router-dom
+
+Importar dentro arquivo App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+O que é BrowserRouter: vai gerenciar as rotas. Browser = navegador, Router = roteador
+
+Alterar o código
+
+import React from "react";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+const App = () => {
+  return (
+    <>
+      <BrowserRouter>
+        <Header />
+        <Main />
+      </BrowserRouter>
+    </>
+  );
+};
+
+export default App;
+
+E dentro da pasta src criar a pasta pages
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6 PASSO - CONEXÃO COM BANCO DE DADOS
+Entrar no mongoDB para pegar o banco de dados de música, pode logar com google mesmo
+Criar o arquivo connect.js
+
+7 PASSO - CONECTAR O FRONTEND COM BACKEND
+Instalar o axios
+npm i axios
+npm i cors
+
+
+8 PASSO - GITHUBE e DEPLOY
+
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finalizar pedido</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+  </head>
+  <body class="body-checkout">
+    <div id="mensagem-toast" class="display-mensagem"></div>
+    <header class="header-checkout">
+      <a href="../../index.html">
+        <img
+          src="../../assests/logo/tlSolucoesAmbientaisVerde.png"
+          alt="Logo tlSolucoesAmbientaisVerde"
+        />
+      </a>
+      <p>FINALIZAR PEDIDO</p>
+    </header>
+
+    <main class="main-checkout">
+      <section id="dados-clientes-checkout" class="dados-form-checkout">
+        <p>DADOS DO CLIENTE</p>
+
+        <div class="dados-clientes-div-checkout">
+          <label for="data-input">Selecionar data:</label>
+          <input type="date" id="data-input" />
+
+          <label>Selecionar clientes:</label>
+          <select id="clientes-select-checkout">
+            <option value="">Selecionar cliente</option>
+          </select>
+
+          <label>Inscrição estadual:</label>
+          <select id="inscricaoEstadual-select-checkout">
+            <option value="">Selecionar inscrição</option>
+          </select>
+
+          <label for="checkout-cpf">CPF:</label>
+          <input type="text" id="checkout-cpf" />
+
+          <label for="checkout-telefone">Telefone:</label>
+          <input type="text" id="checkout-telefone" />
+
+          <label for="checkout-email">Email:</label>
+          <input type="text" id="checkout-email" />
+
+          <label for="checkout-endereco">Endereço:</label>
+          <textarea id="checkout-endereco" rows="3" cols="40"></textarea>
+        </div>
+      </section>
+
+      <section id="dados-pagamento-checkout" class="dados-form-checkout">
+        <p>DADOS DO CARRINHO</p>
+
+        <article id="produtos-carrinho-checkout" class="hidden"></article>
+
+        <section id="celula-checkout"></section>
+      </section>
+
+      <section id="pedido-total-checkout" class="dados-form-checkout">
+        <p>FINALIZAR PEDIDO</p>
+
+        <div
+          id="finalizar-pedido-div-checkout"
+          class="finalizar-pedido-div-checkout hidden"
+        >
+          <div class="card-finalizar-pedido-div-checkout">
+            <span class="checkout-produto-total-titulo"
+              >Total das cultivares</span
+            >
+            <article id="checkout-produto-total"></article>
+          </div>
+
+          <div class="card-finalizar-pedido-div-checkout">
+            <span class="checkout-embalagem-total-titulo"
+              >Total das embalagens</span
+            >
+            <article id="checkout-embalagem-total"></article>
+          </div>
+
+          <div class="card-finalizar-pedido-div-checkout">
+            <span class="checkout-total-titulo">Total das mudas</span>
+            <article id="checkout-total"></article>
+          </div>
+
+          <div class="card-finalizar-pedido-div-checkout">
+            <span class="checkout-valor-total-titulo">Valor total</span>
+            <article id="checkout-valor-total"></article>
+          </div>
+        </div>
+
+        <div class="btn-adi-pedido">
+          <button id="btn-adi-pedido" class="hidden">Finalizar pedido</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="../../assets/database/checkout.js"></script>
+  </body>
+</html>

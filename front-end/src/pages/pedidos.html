@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viveiro Limeira</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+  </head>
+  <body class="body-pedidos">
+    <div id="mensagem-toast" class="display-mensagem"></div>
+    <!-- CABEÇALHO -->
+    <header id="header-pedidos" class="header-pedidos">
+      <a href="../../index.html">
+        <img
+          src="../../assets/logo/tlSolucoesAmbientaisVerde.png"
+          alt="Logo tlSolucoesAmbientaisVerde"
+        />
+      </a>
+      <p class="p1">PEDIDOS</p>
+      <!-- <h3 id="alerta-clientes"></h3> -->
+    </header>
+
+    <!-- FILTROS DOS PEDIDOS -->
+    <div id="filtros-pedidos" class="filtros-pedidos hidden">
+      <!-- FILTRO DO ANO -->
+      <div class="pedidos-form-div-cabecalho">
+        <label>Ano:</label>
+        <select id="ano-select-pedidos">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTO DO NOME COMPLETO -->
+      <div class="pedidos-form-div-cabecalho">
+        <label>Nome:</label>
+        <select id="nome-completo-select-pedidos">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTO DA CULTIVAR -->
+      <div class="pedidos-form-div-cabecalho">
+        <label>Cultivar:</label>
+        <select id="cultivar-select-pedidos">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA SEMENTE -->
+      <div class="pedidos-form-div-cabecalho">
+        <label>Semente:</label>
+        <select id="semente-select-pedidos">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA EMBALAGEM -->
+      <div class="pedidos-form-div-cabecalho">
+        <label>Embalagem:</label>
+        <select id="embalagem-select-pedidos">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <i
+        id="icone-fechar-filtro-pedidos-cadastrados"
+        class="fa-regular fa-circle-xmark"
+      ></i>
+    </div>
+
+    <main class="main-pedidos">
+      <!-- CADASTRAR PEDIDOS -->
+      <section class="pedidos-form-pedidos pedidos-formatar-secoes">
+        <p class="p2">EDITAR PEDIDOS</p>
+
+        <form id="pedidos-form-pedidosbd" class="pedidos-form-pedidosbd">
+          <!-- ANO -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="ano-input">Ano:</label>
+              <input type="text" id="ano-input" disabled />
+            </div>
+          </div>
+
+          <!-- NOME COMPLETO -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="nome-completo-input">Nome:</label>
+              <input type="text" id="nome-completo-input" disabled />
+            </div>
+          </div>
+
+          <!-- CULTIVAR -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="cultivar-input">Cultivar:</label>
+              <input type="text" id="cultivar-input" disabled />
+            </div>
+          </div>
+
+          <!-- SEMENTE -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="semente-input">Semente:</label>
+              <input type="text" id="semente-input" disabled />
+            </div>
+          </div>
+
+          <!-- EMBALAGEM -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="embalagem-input">Embalagem:</label>
+              <input type="text" id="embalagem-input" disabled />
+            </div>
+          </div>
+
+          <!-- PEDIDO -->
+          <div class="pedidos-form-secoes">
+            <div class="pedidos-form-div">
+              <label for="pedido-input">Pedido:</label>
+              <input type="text" id="pedido-input" placeholder="000.000" />
+            </div>
+          </div>
+
+          <!-- BOTÕES -->
+          <div class="pedidos-form-secoes-btn">
+            <button
+              id="pedidos-btn-add-pedidos"
+              class="pedidos-btn-pedidos hidden"
+            >
+              Adicionar
+            </button>
+            <button
+              id="pedidos-btn-edi-pedidos"
+              class="hidden pedidos-btn-pedidos"
+            >
+              Editar
+            </button>
+            <button
+              type="reset"
+              id="pedidos-btn-lim-form"
+              class="pedidos-btn-pedidos hidden"
+            >
+              Limpar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- PEDIDOS CADASTRADOS -->
+      <section class="pedidos-cadastrados">
+        <div class="pedidos-cadastrados-cabecalho">
+          <p id="filtro-pedidos-cadastrados">
+            <i
+              id="icone-filtro-pedidos-cadastrados"
+              class="fa-solid fa-filter"
+            ></i>
+          </p>
+          <p id="producao-pedidos-cadastrados">MUDAS:</p>
+          <!-- <p id="titulo-pedidos-cadastrados">pedidos</p> -->
+        </div>
+
+        <section id="pedidos-pedidosbd" class="pedidos-pedidosbd"></section>
+        <!-- <section
+          id="pedidos-novos-pedidosbd"
+          class="pedidos-pedidosbd"
+        ></section> -->
+      </section>
+    </main>
+    <script type="module" src="../../assets/database/pedidos.js"></script>
+  </body>
+</html>

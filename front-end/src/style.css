@@ -1,0 +1,1750 @@
+/* ----- ROOT ----- */
+
+/* --background: #30343f;
+--primary: #1e2749;
+--secondary: #273469; */
+:root {
+  /* --azul-escuro: rgb(2 6 23); */
+  --azul-escuro: #273469;
+  --azul-medio: #374a95;
+  --azul-claro: #4c63bd;
+  --cinza-escuro: rgb(68, 68, 68);
+  --cinza-medio: -rgb(85, 85, 85);
+  --cinza-claro: rgb(170, 170, 170);
+  /* --cinza-claro: rgb(231 229 228); */
+  --branco: rgb(226 232 240);
+  --vermelho-claro: #ff4a47;
+  /* --primeira-cor-clara: #ffc20a; */
+  /* --primeira-cor-clara: #ffff00;
+  --cor-neutra: #ecf7fe;
+  --segunda-cor: #001466;
+  --segunda-cor-clara: #0a3bff;
+  --botao-excluir-primeira-cor: #ff0e0a;*/
+}
+
+/* ----- GERAL ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+header {
+  & i:hover {
+    color: var(--azul-claro);
+  }
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+  font-family: "Montserrat", "Segoe UI";
+}
+
+input,
+select {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* padding: 0 1.02rem; */
+}
+
+label {
+  font-size: 1.11rem;
+}
+
+input,
+select,
+textarea {
+  cursor: pointer;
+  font-size: 1.6rem;
+  padding: 0.52rem;
+}
+
+.hidden {
+  visibility: hidden;
+}
+.display-mensagem {
+  display: none;
+}
+.p1 {
+  font-size: 3.32rem;
+  font-family: "Montserrat", "Segoe UI";
+  font-weight: bold;
+}
+.p2 {
+  font-size: 2.3rem;
+  font-family: "Montserrat", "Segoe UI";
+  font-weight: bold;
+}
+.p3 {
+  font-size: 1.6rem;
+}
+.p4 {
+  font-size: 1.11rem;
+}
+.p5 {
+  font-size: 0.77rem;
+}
+/* 
+#mensagem-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50; 
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.5s, bottom 0.5s;
+  z-index: 9999;
+}
+ */
+
+#mensagem-toast {
+  position: fixed;
+  top: 10px; /* agora ele descola 20px do topo */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 1.6rem 2.73rem;
+  border-radius: 8px; /* cantos arredondados de todos os lados */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  font-size: 2.3rem;
+  font-family: "Montserrat", "Segoe UI";
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s, top 0.5s;
+  z-index: 9999;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+}
+#mensagem-toast.show {
+  opacity: 1;
+  top: 20px; /* continua 20px no estado ativo */
+}
+
+/* ----- TELA CLIENTES ----- */
+.body-clientes {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.header-clientes {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    font-family: "Montserrat", "Segoe UI";
+    font-weight: bold;
+    color: var(--branco);
+  }
+}
+
+.main-clientes {
+  display: flex;
+  padding: 1.02rem;
+  gap: 1.02rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85%;
+}
+
+.clientes-cadastrados {
+  background-color: var(--branco);
+  width: 33%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-weight: bold;
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+}
+
+.clientes-clientesbd {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.9rem;
+  gap: 0.52rem;
+  overflow-y: auto;
+  height: 85%;
+}
+
+.clientes-clientesbd-div {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+
+  background-color: white;
+  border-radius: 0.52rem;
+  font-size: 1.6rem;
+  margin: 0.52rem;
+
+  & p {
+    font-size: 1.33rem;
+    font-weight: 400;
+  }
+  & .nomeCompleto-card {
+    font-weight: bold;
+  }
+}
+
+.clientes-card-original {
+  background-color: white;
+  color: var(--branco);
+}
+
+.clientes-card-selecionado {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+
+  background-color: var(--azul-escuro);
+  color: white;
+  border-radius: 0.52rem;
+  font-size: 1.6rem;
+
+  & p {
+    color: white;
+    font-size: 1.33rem;
+    font-weight: 400;
+  }
+  & .nomeCompleto-card {
+    font-weight: bold;
+  }
+}
+
+.clientes-btn-edi-cliente {
+  padding: 0 1.11rem;
+
+  &:hover {
+    font-size: 2.3rem;
+  }
+}
+.clientes-btn-exc-cliente {
+  padding: 0 1.11rem 0 0;
+  &:hover {
+    font-size: 2.3rem;
+  }
+}
+
+.clientes-cartaoClienteBd {
+  display: flex;
+}
+
+.clientes-form-clientes {
+  background-color: var(--branco);
+  width: 66%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-weight: bold;
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+}
+
+.clientes-form-clientesbd {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientes-form-secoes {
+  display: flex;
+  gap: 0.52rem;
+}
+
+.clientes-form-div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+  width: 100%;
+
+  & label {
+    /* font-size: 1.11rem; */
+    margin-top: 1.11rem;
+    margin-bottom: 0.52rem;
+  }
+  & span {
+    /* font-size: 1.33rem; */
+    color: var(--vermelho-claro);
+  }
+}
+
+.clientes-form-secoes-btn {
+  display: flex;
+  gap: 3.9rem;
+  margin-top: 0.52rem;
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border-radius: 0.52rem;
+    /* font-size: 3.98rem; */
+    font-weight: bold;
+    padding: 2.5rem;
+    width: 100%;
+  }
+}
+
+.clientes-btn-clientes:hover {
+  background-color: var(--azul-claro);
+}
+
+/* ----- BODY ----- */
+.body-index {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+/* ----- CARRINHO ----- */
+#carrinho {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  right: -40rem;
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  /* height: 100dvh; */
+  width: 40rem;
+  z-index: 50;
+  transition-duration: 0.2s;
+  border-left: 0.01rem solid var(--branco);
+  padding: 0.52rem;
+
+  & #cabecalho-carrinho {
+    display: flex;
+    justify-content: end;
+    font-size: 2.76rem;
+
+    & button {
+      all: unset;
+      cursor: pointer;
+      /* font-size: 3.98rem; */
+      &:hover {
+        color: var(--azul-claro);
+      }
+    }
+  }
+}
+
+#produtos-carrinho {
+  height: 70%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+}
+
+.cartao-produto-carrinho {
+  background-color: var(--branco);
+  color: var(--azul-escuro);
+  border-radius: 0.42rem;
+  padding: 0.52rem;
+  position: relative;
+  margin: 0.52rem 0.52rem;
+}
+
+.fechar-produto-carrinho {
+  color: #444;
+  position: absolute;
+  top: 0.52rem;
+  right: 0.52rem;
+  font-size: 1.6rem;
+  &:hover {
+    color: var(--azul-escuro);
+    cursor: pointer;
+  }
+}
+
+.container-article-carrinho {
+  display: flex;
+  flex-direction: column;
+  font-family: "Montserrat", "Segoe UI";
+}
+
+.cultivar-embalagem-carrinho {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.02rem;
+  text-align: center;
+}
+
+.cultivar-carrinho {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+.embalagem-carrinho {
+  font-size: 1.33rem;
+  color: var(--azul-escuro);
+  font-weight: 400;
+  margin: 0.52rem 0 0.52rem 1.11rem;
+}
+
+.valor-adicionar-carrinho {
+  display: flex;
+  /* align-items: center; */
+  padding-bottom: 0.52rem;
+  gap: 0.52rem;
+}
+
+.qtde-adicionar-carrinho {
+  display: flex;
+  /* justify-content: space-between; */
+
+  /* align-items: center; */
+  gap: 0.52rem;
+  padding-bottom: 0.52rem;
+}
+
+.input-produto-carrinho {
+  font-size: 1.33rem;
+  width: 100%;
+  /* text-align: center; */
+}
+.adicionar-produto-carrinho {
+  /* width: 100%; */
+  text-align: center;
+  font-size: 1.33rem;
+  font-weight: bold;
+  border-radius: 0.42rem;
+  padding: 0.77rem 2.4rem;
+  color: var(--branco);
+  background-color: var(--azul-escuro);
+  margin-top: 1.5rem;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--azul-claro);
+  }
+}
+
+#index-produto-total,
+#index-valor-total {
+  display: flex;
+  justify-content: center;
+  background-color: var(--branco);
+  color: var(--azul-escuro);
+  font-size: 1.6rem;
+  padding: 1.11rem;
+  border-radius: 0.42rem;
+}
+
+& #index-finalizar-compra {
+  display: flex;
+  justify-content: center;
+  font-size: 2.3rem;
+  font-weight: bold;
+  background-color: var(--branco);
+  color: var(--azul-escuro);
+  padding: 1.92rem 0.52rem;
+  border-radius: 0.42rem;
+  margin-bottom: 0.82rem;
+  &:hover {
+    background-color: var(--azul-claro);
+    color: var(--branco);
+  }
+}
+
+/* ----- HEADER ----- */
+.header-index {
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    font-family: "Montserrat", "Segoe UI";
+    /* font-size: 2.76rem;
+    font-weight: bold; */
+    color: var(--branco);
+  }
+  & div {
+    display: flex;
+    align-items: end;
+    gap: 3.12rem;
+    margin-right: 0.52rem;
+    color: var(--branco);
+    & button,
+    a {
+      all: unset;
+      cursor: pointer;
+      margin-right: 0 1.11rem;
+      & i {
+        font-size: 2.3rem;
+      }
+    }
+  }
+}
+
+/* ----- MAIN INDEX ----- */
+.main-index {
+  display: flex;
+  padding: 1.02rem;
+  gap: 0.65rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85%;
+}
+
+.mudas-cartoes {
+  /* background-color: var(--branco); */
+  width: 100%;
+  border-radius: 0.52rem;
+  padding: 0.42rem;
+  box-shadow: 0.42rem 0.42rem 1.11rem rgba(0, 0, 0, 0.25);
+}
+
+.index-mudasbd {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.9rem;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+  /* overflow-y: auto; */
+  height: 85%;
+}
+#container-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* gap: 1.6rem; */
+  /* margin-top: 1rem; */
+}
+
+#container-cultivares-select {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 1.6rem 0.77rem;
+  width: 100%;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0rem;
+  background-color: var(--azul-escuro);
+
+  font-family: "Montserrat", "Segoe UI";
+  z-index: 50;
+  & label {
+    margin-top: 0.42rem;
+    color: var(--branco);
+  }
+  & select {
+    font-size: 1.33rem;
+    margin-bottom: 0.42rem;
+  }
+  & i {
+    font-size: 2.76rem;
+    color: var(--branco);
+    &:hover {
+      color: var(--azul-claro);
+      cursor: pointer;
+    }
+  }
+}
+
+#index-radios-mudas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 1rem; */
+  gap: 0.42rem;
+
+  & label {
+    /* display: flex;
+    justify-content: center;
+    min-width: 3.12rem; */
+
+    cursor: pointer;
+    color: var(--azul-escuro);
+    /* background-color: var(--azul-escuro); */
+    gap: 0.42rem;
+    display: flex;
+    padding: 1.11rem;
+    font-size: 1.6rem;
+    font-weight: 900;
+    border-radius: 0.52rem;
+    font-family: "Montserrat", "Segoe UI";
+  }
+}
+
+/* .radio-custom {
+  display: none;
+} */
+
+/* ----- CONTAINER SOMA ----- */
+.container-soma-pedido-saldo {
+  display: flex;
+  justify-content: center;
+  border-radius: 0.52rem;
+
+  font-size: 1.33rem;
+  font-weight: 500;
+  margin-top: 3.9rem;
+  gap: 1.6rem;
+}
+
+.container-producao-pedido-estoque {
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat", "Segoe UI";
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  font-weight: 400;
+  width: 15%;
+  padding: 1.11rem;
+  border-radius: 0.33rem;
+}
+
+#icone-filtro {
+  color: var(--azul-escuro);
+  cursor: pointer;
+  font-size: 2.76rem;
+  &:hover {
+    color: var(--azul-claro);
+  }
+}
+
+/* ----- CONTAINER PRODUTO ----- */
+.index-mudasbd {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 3.9rem;
+  gap: 3.9rem;
+  overflow-y: auto;
+  height: 85%;
+}
+/* #container-novos-cartoes {
+  position: fixed;
+  top: 0;
+  z-index: 100;
+} */
+
+#container-cartoes {
+  height: 80%;
+}
+.card-produto {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 21rem;
+  height: 20.5rem;
+  border-radius: 0.52rem;
+  box-shadow: 0.42rem 0.42rem 1.11rem rgba(0, 0, 0, 0.5);
+  gap: 0.82rem;
+  padding: 0.52rem 0.52rem 0 0.52rem;
+  & button {
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border-radius: 0.33rem;
+    padding: 0.52rem;
+    margin-bottom: 1.11rem;
+    font-size: 1.6rem;
+    &:hover {
+      background-color: var(--azul-claro);
+    }
+  }
+}
+.cultivar {
+  font-family: "Montserrat", "Segoe UI";
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: var(--azul-escuro);
+  margin: 1.11rem 0 0.52rem 0;
+}
+
+.ano {
+  font-family: "Montserrat", "Segoe UI";
+  font-size: 1.33rem;
+  font-weight: bold;
+  color: var(--azul-escuro);
+}
+.semente,
+.embalagem,
+.producao,
+.pedido {
+  font-family: "Montserrat", "Segoe UI";
+  font-size: 1.33rem;
+  font-weight: 400;
+  color: var(--azul-escuro);
+}
+.estoque {
+  font-family: "Montserrat", "Segoe UI";
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--azul-escuro);
+  margin-top: 0.52rem;
+}
+
+/* p {
+  margin: 0.42rem;
+  font-size: 1.33rem;
+} */
+
+/* ----- SELECT ----- */
+.cultivares-select {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----- TELA CHECKOUT ----- */
+.body-checkout {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.header-checkout {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    font-family: "Montserrat", "Segoe UI";
+    font-size: 2.76rem;
+    font-weight: bold;
+    color: var(--branco);
+  }
+}
+
+.main-checkout {
+  display: flex;
+  padding: 1.02rem;
+  gap: 1.02rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85%;
+}
+
+.dados-form-checkout {
+  background-color: var(--branco);
+  width: 33%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-size: 1.92rem;
+    font-weight: bold;
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+}
+/* .clientes-select-checkout {
+  margin-top: 1.02rem;
+} */
+
+.dados-clientes-div-checkout {
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+  & label {
+    margin-top: 2rem;
+    margin-bottom: 0.52rem;
+  }
+}
+
+#checkout-endereco {
+  padding: 1.11rem;
+}
+
+#produtos-carrinho-checkout {
+  margin-top: 1.28rem;
+  height: 95%;
+  overflow-y: auto;
+  padding: 0 0.52rem;
+}
+
+.container-produto-checkout {
+  display: flex;
+  flex-direction: column;
+  margin: 0.52rem 0.52rem 1.11rem 0.52rem;
+  background-color: white;
+  box-shadow: 0.42rem 0.42rem 1.11rem rgba(0, 0, 0, 0.5);
+  /* border: 0.05rem solid var(--azul-escuro); */
+  border-radius: 0.52rem;
+  padding: 0.52rem;
+  gap: 0.27rem;
+  color: var(--azul-escuro);
+  & span {
+    font-size: 1.33rem;
+    text-align: center;
+  }
+  & .cultivar-checkout {
+    /* color: var(--cinza-escuro); */
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  & .cultivar-pedido {
+    font-weight: bold;
+  }
+}
+
+.finalizar-pedido-div-checkout {
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+  gap: 1.02rem;
+
+  color: var(--azul-escuro);
+  & label {
+    margin-top: 2rem;
+    margin-bottom: 0.52rem;
+  }
+}
+
+.card-finalizar-pedido-div-checkout {
+  margin: 0.52rem 0.52rem 1.11rem 0.52rem;
+  background-color: white;
+  box-shadow: 0.42rem 0.42rem 1.11rem rgba(0, 0, 0, 0.5);
+  /* border: 0.05rem solid var(--azul-escuro); */
+  border-radius: 0.52rem;
+  padding: 0.52rem;
+}
+
+.checkout-produto-total-titulo,
+.checkout-embalagem-total-titulo,
+.checkout-total-titulo,
+.checkout-valor-total-titulo {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-weight: 700;
+  /* font-family: "Segoe UI"; */
+  text-align: center;
+  color: var(--azul-escuro);
+  margin-top: 0.6rem;
+}
+#checkout-produto-total,
+#checkout-embalagem-total,
+#checkout-total,
+#checkout-valor-total {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.33rem;
+  /* font-family: "Montserrat", "Segoe UI"; */
+}
+
+.btn-adi-pedido {
+  display: flex;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  justify-content: center;
+  height: 20%;
+  width: 100%;
+  margin-top: 1.6rem;
+}
+
+#btn-adi-pedido {
+  text-align: center;
+  width: 100%;
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  border-radius: 0.52rem;
+  font-size: 3.98rem;
+  font-weight: bold;
+  &:hover {
+    background-color: rgba(39, 52, 105, 0.5);
+  }
+}
+
+/* display: flex; */
+
+/* ----- TELA MUDAS ----- */
+.body-mudas {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+.header-mudas {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    font-family: "Montserrat", "Segoe UI";
+    /* font-size: 2.76rem;
+    font-weight: bold; */
+    color: var(--branco);
+  }
+}
+
+.mudas-cadastradas-cabecalho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 3.12rem;
+}
+
+#icone-filtro-mudas-cadastradas {
+  font-size: 2.76rem;
+}
+#producao-mudas-cadastradas {
+  font-family: "Montserrat", "Segoe UI";
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  font-weight: 400;
+  width: 33%;
+  font-size: 1.33rem;
+  padding: 1.11rem;
+  border-radius: 0.52rem;
+}
+#filtro-mudas-cadastradas {
+  z-index: 100;
+  &:hover {
+    cursor: pointer;
+    color: var(--azul-claro);
+  }
+}
+
+.filtros-mudas {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 1.6rem 0.77rem;
+  width: 100%;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0rem;
+  background-color: var(--azul-escuro);
+
+  font-family: "Montserrat", "Segoe UI";
+  z-index: 50;
+  & label {
+    margin-top: 0.42rem;
+    color: var(--branco);
+  }
+  & select {
+    font-size: 1.33rem;
+    margin-bottom: 0.42rem;
+  }
+  & i {
+    font-size: 2.76rem;
+    color: var(--branco);
+    &:hover {
+      color: var(--azul-claro);
+      cursor: pointer;
+    }
+  }
+}
+.main-mudas {
+  display: flex;
+  padding: 1.02rem;
+  gap: 1.02rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85%;
+}
+
+.mudas-cadastradas {
+  background-color: var(--branco);
+  width: 70%;
+  border-radius: 0.52rem;
+  padding: 0.42rem;
+
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-size: 1.92rem;
+    font-weight: bold;
+    color: var(--azul-escuro);
+  }
+}
+
+.mudas-mudasbd {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.9rem;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+  overflow-y: auto;
+  height: 84%;
+}
+
+.mudas-form-mudas {
+  background-color: var(--branco);
+  width: 30%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    /* font-size: 1.92rem;
+    font-weight: bold; */
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+}
+
+.mudas-form-mudasbd {
+  display: flex;
+  flex-direction: column;
+}
+
+.mudas-form-secoes {
+  display: flex;
+  gap: 0.52rem;
+}
+
+.mudas-form-div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+  width: 100%;
+
+  & label {
+    font-size: 1.11rem;
+    margin-top: 1.11rem;
+    margin-bottom: 0.52rem;
+  }
+  & span {
+    font-size: 1.33rem;
+    color: var(--vermelho-claro);
+  }
+}
+.mudas-form-div-cabecalho {
+  display: flex;
+  flex-direction: column;
+
+  & label {
+    font-size: 1.11rem;
+
+    margin-bottom: 0.52rem;
+  }
+}
+
+.mudas-form-secoes-btn {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.11rem;
+  margin-top: 0.52rem;
+  /* flex-wrap: wrap; */
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border-radius: 0.52rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1.28rem 3.9rem;
+    width: 2rem;
+  }
+}
+
+.mudas-mudasbd-div {
+  display: flex;
+  flex-direction: column;
+
+  width: 15%;
+  height: 28%;
+  background-color: white;
+  border-radius: 0.52rem;
+  font-size: 1.6rem;
+  padding: 0.52rem;
+  gap: 0.52rem;
+
+  & p {
+    font-size: 1.33rem;
+    font-weight: 400;
+    margin-top: 0.52rem;
+  }
+  & .cultivar-card {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0.52rem 0;
+  }
+  & .ano-card {
+    font-weight: bold;
+  }
+}
+
+.mudas-card-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.52rem;
+  background-color: var(--branco);
+  border-radius: 0.42rem;
+}
+
+.mudas-btn-mudas:hover {
+  background-color: var(--azul-claro);
+}
+
+.mudas-btn-edi-mudas {
+  border-radius: 0.52rem;
+  padding: 0.52rem 1.11rem;
+  &:hover {
+    background-color: white;
+  }
+}
+.mudas-btn-exc-mudas {
+  border-radius: 0.52rem;
+  padding: 0.52rem 1.11rem;
+  &:hover {
+    background-color: white;
+  }
+}
+
+/* ----- TELA PEDIDOS ----- */
+.body-pedidos {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+.header-pedidos {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    font-family: "Montserrat", "Segoe UI";
+    /* font-size: 2.76rem; */
+    font-weight: bold;
+    color: var(--branco);
+  }
+}
+
+.pedidos-cadastrados-cabecalho {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 3.12rem;
+}
+
+#icone-filtro-pedidos-cadastrados {
+  font-size: 2.76rem;
+}
+#producao-pedidos-cadastrados {
+  font-family: "Montserrat", "Segoe UI";
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  font-weight: 400;
+  width: 33%;
+  font-size: 1.33rem;
+  padding: 1.11rem;
+  border-radius: 0.52rem;
+}
+#filtro-pedidos-cadastrados {
+  z-index: 100;
+  &:hover {
+    cursor: pointer;
+    color: var(--azul-claro);
+  }
+}
+
+.filtros-pedidos {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 1.6rem 0.77rem;
+  width: 100%;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0rem;
+  background-color: var(--azul-escuro);
+
+  font-family: "Montserrat", "Segoe UI";
+  z-index: 50;
+  & label {
+    margin-top: 0.42rem;
+    color: var(--branco);
+  }
+  & select {
+    font-size: 1.33rem;
+    margin-bottom: 0.42rem;
+  }
+  & i {
+    font-size: 2.76rem;
+    color: var(--branco);
+    &:hover {
+      color: var(--azul-claro);
+      cursor: pointer;
+    }
+  }
+}
+.main-pedidos {
+  display: flex;
+  padding: 1.02rem;
+  gap: 1.02rem;
+  flex-grow: 1;
+  width: 100%;
+  height: 85%;
+}
+
+.pedidos-cadastrados {
+  background-color: var(--branco);
+  width: 70%;
+  border-radius: 0.52rem;
+  padding: 0.42rem;
+
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-size: 1.92rem;
+    font-weight: bold;
+    color: var(--azul-escuro);
+  }
+}
+
+.pedidos-pedidosbd {
+  display: flex;
+  justify-content: center;
+  margin-top: 3.9rem;
+  flex-wrap: wrap;
+  gap: 1.02rem;
+  overflow-y: auto;
+  height: 84%;
+}
+
+.pedidos-form-pedidos {
+  background-color: var(--branco);
+  width: 30%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    /* font-size: 1.92rem; */
+    font-weight: bold;
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+}
+
+.pedidos-form-pedidosbd {
+  display: flex;
+  flex-direction: column;
+}
+
+.pedidos-form-secoes {
+  display: flex;
+  gap: 0.52rem;
+}
+
+.pedidos-form-div {
+  display: flex;
+  flex-direction: column;
+  padding: 0.52rem;
+  width: 100%;
+
+  & label {
+    font-size: 1.11rem;
+    margin-top: 1.11rem;
+    margin-bottom: 0.52rem;
+  }
+  & span {
+    font-size: 1.33rem;
+    color: var(--vermelho-claro);
+  }
+}
+.pedidos-form-div-cabecalho {
+  display: flex;
+  flex-direction: column;
+  /* height: 1rem; */
+  /* padding: 0.52rem; */
+  /* width: 100%; */
+
+  & label {
+    font-size: 1.11rem;
+    /* margin-top: 1.11rem; */
+    margin-bottom: 0.52rem;
+  }
+}
+
+.pedidos-form-secoes-btn {
+  display: flex;
+  justify-content: space-around;
+  gap: 1.11rem;
+  margin-top: 0.52rem;
+  /* flex-wrap: wrap; */
+  & button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    border-radius: 0.52rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    padding: 1.28rem 3.9rem;
+    width: 2rem;
+  }
+}
+
+.pedidos-pedidosbd-div {
+  display: flex;
+  flex-direction: column;
+
+  width: 14%;
+  height: 40%;
+  background-color: white;
+  border-radius: 0.52rem;
+  font-size: 1.6rem;
+  padding: 0.52rem;
+  gap: 0.52rem;
+
+  & p {
+    font-size: 1.33rem;
+    font-weight: 400;
+    margin-top: 0.52rem;
+  }
+  & .nome-completo-card {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0.52rem 0;
+  }
+  & .cultivar-card,
+  .ano-card {
+    font-weight: bold;
+  }
+}
+
+.pedidos-pedidosbd-div-selecionado {
+  display: flex;
+  flex-direction: column;
+
+  width: 14%;
+  height: 40%;
+  background-color: var(--azul-escuro);
+  border-radius: 0.52rem;
+  font-size: 1.6rem;
+  padding: 0.52rem;
+  gap: 0.52rem;
+
+  & p {
+    color: white;
+    font-size: 1.33rem;
+    font-weight: 400;
+    margin-top: 0.52rem;
+  }
+  & .nome-completo-card {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 0.52rem 0;
+  }
+  & .cultivar-card,
+  .ano-card {
+    font-weight: bold;
+  }
+}
+
+.pedidos-card-btn {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.52rem;
+  background-color: var(--branco);
+  border-radius: 0.42rem;
+}
+
+.pedidos-btn-pedidos:hover {
+  background-color: var(--azul-claro);
+}
+
+.pedidos-btn-edi-pedidos {
+  /* margin-bottom: 1.11rem; */
+  border-radius: 0.52rem;
+  padding: 0.52rem 1.11rem;
+  /* background-color: var(--branco); */
+  &:hover {
+    background-color: white;
+    /* font-size: 2.3rem; */
+  }
+}
+.pedidos-btn-exc-pedidos {
+  /* padding: 1.11rem; */
+  border-radius: 0.52rem;
+  /* background-color: var(--branco); */
+  padding: 0.52rem 1.11rem;
+  &:hover {
+    background-color: white;
+    /* font-size: 2.3rem; */
+  }
+}
+
+/* ----- ENTREGAS ----- */
+.body-entregas {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.header-entregas {
+  display: flex;
+  position: sticky;
+  top: 0;
+  background-color: var(--azul-escuro);
+  padding: 1.6rem 2.76rem;
+
+  & img {
+    height: 5.73rem;
+  }
+  & p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    color: var(--branco);
+  }
+}
+
+.filtros-entregas {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 1.6rem 0.77rem;
+  width: 100%;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0rem;
+  background-color: var(--azul-escuro);
+
+  font-family: "Montserrat", "Segoe UI";
+  z-index: 50;
+  & label {
+    margin-top: 0.42rem;
+    color: var(--branco);
+  }
+  & select {
+    font-size: 1.33rem;
+    margin-bottom: 0.42rem;
+  }
+  & i {
+    font-size: 2.76rem;
+    color: var(--branco);
+    &:hover {
+      color: var(--azul-claro);
+      cursor: pointer;
+    }
+  }
+}
+
+.entregas-form-div-cabecalho {
+  display: flex;
+  flex-direction: column;
+
+  & label {
+    font-size: 1.11rem;
+    margin-bottom: 0.52rem;
+  }
+}
+
+.main-entregas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin: 1.02rem 0;
+}
+
+.div-main-entregas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.52rem;
+  border-radius: 0.52rem;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.historico-entregas-titulo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.02rem;
+}
+#icone-filtro-historico-entregas {
+  cursor: pointer;
+  & i:hover {
+    color: var(--azul-claro);
+  }
+}
+
+.section-entregas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.52rem;
+  padding: 1.02rem;
+  margin: 0 0.52rem;
+  background-color: var(--branco);
+  height: 100%;
+  width: 100%;
+  font-weight: bold;
+  color: var(--azul-escuro);
+  gap: 1.02rem;
+}
+
+#cards-entregas {
+  padding-top: 3.12rem;
+  width: 75%;
+}
+
+#form-entregas {
+  padding-top: 3.12rem;
+  width: 25%;
+  & select,
+  input {
+    font-size: 1.6rem;
+  }
+}
+
+.div-form-entregas {
+  margin-top: 1.02rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.div-entregas-botoes {
+  display: flex;
+  gap: 1.02rem;
+}
+#btn-adicionar-entrega,
+#btn-editar-entrega {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+  border-radius: 0.52rem;
+  font-weight: bold;
+  padding: 1.33rem;
+  width: 100%;
+}
+
+#btn-adicionar-entrega:hover,
+#btn-editar-entrega:hover {
+  background-color: var(--azul-claro);
+}
+
+#entregas-cliente {
+  display: flex;
+  gap: 1.02rem;
+}
+
+/* Estilo base da tabela */
+#tabela-pedidos table,
+#tabela-entregas table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  font-family: "Montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.33rem;
+  font-weight: 400;
+  background-color: #ffffff;
+  box-shadow: 0 0 0.01rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.52rem;
+  overflow: hidden;
+}
+
+/* Cabeçalho da tabela */
+#tabela-pedidos thead,
+#tabela-entregas thead {
+  background-color: var(--azul-escuro);
+  color: white;
+}
+
+#tabela-pedidos th,
+#tabela-entregas th {
+  padding: 2rem 1.6rem;
+  text-align: center;
+  border-bottom: 0.01rem solid #ddd;
+}
+
+#tabela-pedidos td,
+#tabela-entregas td {
+  padding: 1.33rem 1.28rem;
+  text-align: center;
+  border-bottom: 0.01rem solid #ddd;
+  cursor: pointer;
+}
+
+/* Alternar cor das linhas */
+#tabela-pedidos tbody tr:nth-child(even),
+#tabela-entregas tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover nas linhas */
+#tabela-pedidos tbody tr:hover,
+#tabela-entregas tbody tr:hover {
+  background-color: #e0f2f1;
+}
+
+input.erro,
+select.erro {
+  border: 0.01rem solid #ff4a47;
+  border-radius: 0.52rem;
+  background-color: #ffe6e6;
+}
+
+.select-lado-lado {
+  display: flex;
+  gap: 1.02rem;
+  width: 100%;
+}
+
+#tabela-entregas button {
+  margin: 0 2px;
+  padding: 4px 6px;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#tabela-entregas .btn-editar-entrega:hover {
+  background-color: var(--azul-escuro);
+  color: var(--branco);
+}
+
+#tabela-entregas .btn-excluir-entrega:hover {
+  background-color: #f44336;
+  /* background-color: var(--azul-escuro); */
+  color: var(--branco);
+}
+
+/* .linha-selecionada {
+  border: 0.33rem solid #2196f3;
+  background-color: #e3f2fd;
+  box-sizing: border-box;
+} */
+
+.linha-selecionada {
+  box-shadow: inset 0 0 0 9999px rgba(76, 99, 189, 0.3);
+  color: black;
+  font-weight: 500;
+}
+
+/* Estilo dos botões */
+/* #tabela-pedidos button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #388e3c;
+  color: white;
+  cursor: pointer;
+  font-size: 12px;
+  margin: 0 2px;
+  transition: background-color 0.2s ease;
+} */
+
+/* #tabela-pedidos button:hover {
+  background-color: #2e7d32;
+} */
+
+/* .form-entregas {
+  background-color: var(--branco);
+  width: 30%;
+  border-radius: 0.52rem;
+  padding: 3.12rem;
+  & p {
+    text-align: center;
+    font-family: "Montserrat", "Segoe UI";
+    font-size: 1.92rem;
+    font-weight: bold;
+    color: var(--azul-escuro);
+    padding: 0.52rem;
+    margin: 0.52rem 0;
+  }
+} */
+/* -----  ----- */
+/* -----  ----- */
+/* -----  ----- */
+/* -----  ----- */
+
+/* .selected {
+  background-color: aliceblue;
+} */
+
+/* .selecionado {
+  background-color: #4caf50;
+  color: white;
+  border-color: #4caf50;
+} */

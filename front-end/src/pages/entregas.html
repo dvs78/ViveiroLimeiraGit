@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entregas</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+  </head>
+  <body class="body-entregas">
+    <div id="mensagem-toast" class="display-mensagem"></div>
+    <header id="header-entregas" class="header-entregas">
+      <a href="../../index.html">
+        <img
+          src="../../assets/logo/tlSolucoesAmbientaisVerde.png"
+          alt="Logo tlSolucoesAmbientaisVerde"
+        />
+      </a>
+      <p class="p1">ENTREGAS</p>
+    </header>
+
+    <!-- FILTROS DAS ENTREGAS -->
+    <div id="filtros-entregas" class="filtros-entregas hidden">
+      <!-- FILTRO DO ANO -->
+      <div class="entregas-form-div-cabecalho">
+        <label>Ano:</label>
+        <select id="ano-select-entregas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DO NOME COMPLETO -->
+      <div class="entregas-form-div-cabecalho">
+        <label>Nome:</label>
+        <select id="nome-completo-select-entregas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA CULTIVAR -->
+      <div class="entregas-form-div-cabecalho">
+        <label>Cultivar:</label>
+        <select id="cultivar-select-entregas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA SEMENTE -->
+      <div class="entregas-form-div-cabecalho">
+        <label>Semente:</label>
+        <select id="semente-select-entregas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA EMBALAGEM -->
+      <div class="entregas-form-div-cabecalho">
+        <label>Embalagem:</label>
+        <select id="embalagem-select-entregas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <i
+        id="icone-fechar-filtro-entregas-cadastrados"
+        class="fa-regular fa-circle-xmark"
+      ></i>
+    </div>
+
+    <main class="main-entregas">
+      <div class="div-main-entregas">
+        <form id="form-entregas" class="section-entregas p2">
+          CADASTRAR ENTREGA
+          <!-- SELECT DATA -->
+          <div class="div-form-entregas">
+            <label for="input-data">Data:</label>
+            <input type="date" id="input-data" />
+          </div>
+
+          <!-- SELECT CLIENTES -->
+          <div class="div-form-entregas">
+            <label>Clientes:</label>
+            <select id="select-clientes">
+              <option value="">Selecionar cliente</option>
+            </select>
+          </div>
+
+          <!-- SELECT INSCRIÇÃO ESTADUAL -->
+          <div class="div-form-entregas">
+            <label>Inscrição estadual:</label>
+            <select id="select-inscrição-estadual">
+              <option value="">Selecionar Inscrição estadual</option>
+            </select>
+          </div>
+
+          <!-- SELECT CULTIVAR -->
+          <div class="div-form-entregas">
+            <label>Cultivar:</label>
+            <select id="select-cultivar">
+              <option value="">Selecionar cultivar</option>
+            </select>
+          </div>
+
+          <!-- SELECT SEMENTE -->
+          <div class="div-form-entregas">
+            <label>Semente:</label>
+            <select id="select-semente">
+              <option value="">Selecionar semente</option>
+            </select>
+          </div>
+
+          <!-- SELECT EMBALAGEM -->
+          <div class="div-form-entregas">
+            <label>Embalagem:</label>
+            <select id="select-embalagem">
+              <option value="">Selecionar embalagem</option>
+            </select>
+          </div>
+
+          <!-- INPUT VEÍCULO -->
+          <div class="div-form-entregas">
+            <label for="tipo-veiculo">Tipo de veículo:</label>
+            <input type="text" id="tipo-veiculo" />
+          </div>
+
+          <!-- INPUT MOTORISTA -->
+          <div class="div-form-entregas">
+            <label for="motorista">Motorista:</label>
+            <input type="text" id="motorista" />
+          </div>
+
+          <div class="select-lado-lado">
+            <!-- INPUT QTDE MUDAS -->
+            <div class="div-form-entregas">
+              <label for="entrega">Qtde mudas:</label>
+              <input type="text" id="entrega" />
+            </div>
+
+            <!-- INPUT QTDE PESSOAS -->
+            <div class="div-form-entregas">
+              <label for="qtde-pessoas">Qtde de pessoas:</label>
+              <input type="text" id="qtde-pessoas" />
+            </div>
+          </div>
+
+          <!-- BOTÃO ADICIONAR -->
+          <div class="div-form-entregas">
+            <div class="div-entregas-botoes">
+              <button id="btn-adicionar-entrega" class="p3">Adicionar</button>
+              <button id="btn-editar-entrega" class="p3 hidden">Editar</button>
+            </div>
+          </div>
+        </form>
+        <section id="secao-entregas" class="section-entregas p2">
+          <div
+            id="icone-filtro-historico-entregas"
+            class="historico-entregas-titulo"
+          >
+            <i class="fa-solid fa-filter"></i>
+            <p>HISTÓRICO DE PEDIDOS e ENTREGAS</p>
+          </div>
+          <article id="tabela-pedidos"></article>
+          <article id="tabela-entregas"></article>
+        </section>
+      </div>
+    </main>
+    <script type="module" src="../../assets/database/entregas.js"></script>
+  </body>
+</html>

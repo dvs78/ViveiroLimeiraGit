@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Produção de mudas</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+  </head>
+  <body class="body-mudas">
+    <div id="mensagem-toast" class="display-mensagem"></div>
+    <!-- CABEÇALHO -->
+    <header id="header-mudas" class="header-mudas">
+      <a href="../../index.html">
+        <img
+          src="../..assets/logo/tlSolucoesAmbientaisVerde.png"
+          alt="Logo tlSolucoesAmbientaisVerde"
+        />
+      </a>
+      <p class="p1">CADASTRAR PRODUÇÃO DE MUDAS</p>
+      <!-- <h3 id="alerta-clientes"></h3> -->
+    </header>
+
+    <!-- FILTROS DAS MUDAS -->
+    <div id="filtros-mudas" class="filtros-mudas hidden">
+      <!-- FILTRO DO ANO -->
+      <div class="mudas-form-div-cabecalho">
+        <label>Ano:</label>
+        <select id="ano-select-mudas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTO DA CULTIVAR -->
+      <div class="mudas-form-div-cabecalho">
+        <label>Cultivar:</label>
+        <select id="cultivar-select-mudas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA SEMENTE -->
+      <div class="mudas-form-div-cabecalho">
+        <label>Semente:</label>
+        <select id="semente-select-mudas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- FILTRO DA EMBALAGEM -->
+      <div class="mudas-form-div-cabecalho">
+        <label>Embalagem:</label>
+        <select id="embalagem-select-mudas">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <i
+        id="icone-fechar-filtro-mudas-cadastradas"
+        class="fa-regular fa-circle-xmark"
+      ></i>
+    </div>
+
+    <main class="main-mudas">
+      <!-- CADASTRAR MUDAS -->
+      <section class="mudas-form-mudas mudas-formatar-secoes">
+        <p class="p2">CADASTRAR MUDAS</p>
+
+        <form id="mudas-form-mudasbd" class="mudas-form-mudasbd">
+          <!-- ANO -->
+          <div class="mudas-form-secoes">
+            <div class="mudas-form-div">
+              <label>Ano:</label>
+              <select id="ano-select">
+                <option value="">Selecionar ano</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cultivar -->
+          <div class="mudas-form-secoes">
+            <div class="mudas-form-div">
+              <label>Cultivar:</label>
+              <select id="cultivar-select">
+                <option value="">Selecionar cultivar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mudas-form-secoes">
+            <div class="mudas-form-div">
+              <label>Semente:</label>
+              <select id="semente-select">
+                <option value="">Selecionar semente</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mudas-form-secoes">
+            <div class="mudas-form-div">
+              <label>Embalagem:</label>
+              <select id="embalagem-select">
+                <option value="">Selecionar embalagem</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- NOME, QUANTIDADE -->
+          <div class="mudas-form-secoes">
+            <div class="mudas-form-div">
+              <label for="producao-input">Produção:</label>
+              <input type="text" id="producao-input" placeholder="000.000" />
+            </div>
+          </div>
+
+          <!-- BOTÕES -->
+          <div class="mudas-form-secoes-btn">
+            <button id="mudas-btn-add-mudas" class="mudas-btn-mudas">
+              Adicionar
+            </button>
+            <button id="mudas-btn-edi-mudas" class="hidden mudas-btn-mudas">
+              Editar
+            </button>
+            <button
+              type="reset"
+              id="mudas-btn-lim-form"
+              class="mudas-btn-mudas"
+            >
+              Limpar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- MUDAS CADASTRADAS BD -->
+      <section class="mudas-cadastradas">
+        <div class="mudas-cadastradas-cabecalho">
+          <p id="filtro-mudas-cadastradas">
+            <i
+              id="icone-filtro-mudas-cadastradas"
+              class="fa-solid fa-filter"
+            ></i>
+          </p>
+          <p id="producao-mudas-cadastradas">PRODUÇÃO:</p>
+          <!-- <p id="titulo-mudas-cadastradas">MUDAS</p> -->
+        </div>
+
+        <section id="mudas-mudasbd" class="mudas-mudasbd"></section>
+      </section>
+    </main>
+    <script type="module" src="../../assets/database/mudas.js"></script>
+  </body>
+</html>

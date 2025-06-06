@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Viveiro Limeira</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+    />
+  </head>
+  <body class="body-index">
+    <div id="mensagem-toast" class="display-mensagem"></div>
+    <!-- CARRINHO -->
+    <section id="carrinho">
+      <div id="cabecalho-carrinho">
+        <button id="fechar-carrinho">
+          <i class="fa-solid fa-circle-xmark"></i>
+        </button>
+      </div>
+      <section id="produtos-carrinho"></section>
+      <p id="index-produto-total"></p>
+      <p id="index-valor-total"></p>
+      <button id="index-finalizar-compra" class="hidden">
+        Finalizar carrinho
+      </button>
+    </section>
+
+    <header id="header-index" class="header-index">
+      <img
+        src="./assets/logo/tlSolucoesAmbientaisVerde.png"
+        alt="Logo tlSolucoesAmbientaisVerde"
+      />
+      <p class="p1">VIVEIRO DE MUDAS DE CAFÉ</p>
+
+      <div>
+        <!-- <p id="filtro-mudas-cadastradas"> -->
+
+        <a href="./src/pages/entregas.html"
+          ><i class="fa-solid fa-truck"></i
+        ></a>
+        <a href="./src/pages/pedidos.html"><i class="fa-solid fa-book"></i></a>
+        <a href="./src/pages/mudas.html"
+          ><i class="fa-solid fa-seedling"></i
+        ></a>
+        <a href="./src/pages/clientes.html">
+          <i class="fa-solid fa-user"></i>
+        </a>
+
+        <button id="abrir-carrinho">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- FILTROS DAS MUDAS -->
+    <article
+      id="container-cultivares-select"
+      class="filtros-mudas-index hidden"
+    >
+      <div class="ano-select">
+        <label>Selecionar ano:</label>
+        <select id="ano-select">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <div class="cultivar-select">
+        <label>Selecionar cultivar:</label>
+        <select id="cultivar-select">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <!-- <div class="semente-select">
+        <label>Selecionar semente:</label>
+        <select id="semente-select">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div> -->
+
+      <div class="embalagem-select">
+        <label>Selecionar embalagem:</label>
+        <select id="embalagem-select">
+          <option value="">Selecionar tudo</option>
+        </select>
+      </div>
+
+      <i id="icone-fechar-filtro" class="fa-regular fa-circle-xmark"></i>
+    </article>
+
+    <main class="main-index">
+      <section class="mudas-cartoes">
+        <div class="mudas-cadastradas-cartoes">
+          <!-- <div id="container-main"> -->
+          <!-- <section id="mudas-mudasbd" class="mudas-mudasbd"></section>
+    <section id="mudas-novaMudasbd" class="mudas-mudasbd"></section> -->
+          <!-- </div> -->
+
+          <div class="container-soma-pedido-saldo">
+            <i id="icone-filtro" class="fa-solid fa-filter"></i>
+            <section
+              id="container-produto-soma"
+              class="container-producao-pedido-estoque"
+            ></section>
+            <section
+              id="container-produto-pedido"
+              class="container-producao-pedido-estoque"
+            ></section>
+            <section
+              id="container-produto-estoque"
+              class="container-producao-pedido-estoque"
+            ></section>
+          </div>
+        </div>
+
+        <section id="container-cartoes" class="index-mudasbd"></section>
+        <section id="container-novos-cartoes"></section>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/components/cartaoProduto.js"></script>
+  </body>
+</html>

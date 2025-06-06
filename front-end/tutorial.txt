@@ -1,0 +1,454 @@
+  
+
+
+
+
+12 PASSO - RODAR O INSOMNIA
+Abrir o insomnia e digitar = http://localhost:3000/
+
+
+
+
+
+
+15 PASSO - AUTOMATIZAR O DbClass.js, rotasClientes.js e CRIAR O DbClassClientes.js
+
+AUTOMATIZAR O DbClass.js
+import pool from "./db.js";
+
+class DbClass {
+  // PEGAR TUDO
+  async getAll(tabela, colunas) {
+    try {
+      const results = (
+        await pool.query(`SELECT ${colunas.join()} FROM ${tabela}`)
+      ).rows;
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export default DbClass;
+
+CRIAR O DbClassClientes.js
+import DbClass from "./DbClass.js";
+
+class DbClassClientes extends DbClass {
+  async getAll() {
+    try {
+      const results = await super.getAll("clientes", [
+        "nome",
+        "sobrenome",
+        "telefone",
+        "email",
+        "cpf",
+      ]);
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+
+export default DbClassClientes;
+
+AUTOMATIZAR O rotasClientes.js
+import { Router } from "express";
+// import DbClass from "../dbOnLine/DbClass.js";
+import DbClassClientes from "../dbOnLine/DbClassClientes.js";
+
+const rotas = Router();
+
+// ROTA PARA PEGAR TODOS OS CLIENTES
+rotas.get("/", async (req, res) => {
+  const result = await new DbClassClientes().getAll();
+  res.status(200).send(result);
+});
+
+export default rotas;
+
+16 PASSO - CRIAR O ARQUIVO index.html e style.class
+Linkar o style.css ao index.html
+
+ARQUIVO HTML INICIAL
+<body>
+    <header></header>
+    <main>
+      <section id="container-produto">
+        <div id="card-produto-1">
+          <span>Catuaí 62</span>
+          <p>Saquinho</p>
+          <p>Produção</p>
+          <p>Pedidos</p>
+          <p>Saldo</p>
+          <button>Adicionar</button>
+        </div>
+      </section>
+    </main>
+  </body>
+
+17 PASSO - CRIAR O ARQUIVO main.js
+Criar no main, o banco de dados (dicionário) para cultivares = produtos
+
+18 PASSO - COMO ESTÁ O ARQUIVO index.html e main.js
+
+index.html
+
+<body>
+    <header></header>
+    <main>
+      <section id="container-produto"></section>
+    </main>
+    <script src="main.js"></script>
+  </body>
+
+main.js
+
+const catalogo = [
+  {
+    id: "2025-1",
+    nome: "Catuaí 62",
+    embalgem: "Saquinho",
+    saquinho: true,
+    producao: 2000,
+    pedido: 0,
+    saldo: 0,
+  },
+  {
+    id: "2025-2",
+    nome: "Catuaí 62",
+    embalgem: "Tubete",
+    tubete: true,
+    producao: 1000,
+    pedido: 0,
+    saldo: 0,
+  },
+  {
+    id: "2025-3",
+    nome: "Catuaí 62",
+    embalgem: "Paper Pot",
+    paperPot: true,
+    producao: 1000,
+    pedido: 0,
+    saldo: 0,
+  },
+];
+
+for (const produtoCatalogo of catalogo) {
+  const cartaoProduto = `
+  <div id="card-produto-1">
+    <span>${produtoCatalogo.nome}</span>
+    <p>${produtoCatalogo.embalgem}</p>
+    <p>${produtoCatalogo.producao}</p>
+    <p>${produtoCatalogo.pedido}</p>
+    <p>${produtoCatalogo.saldo}</p>
+    <button>Adicionar</button>
+  </div>`;
+  document.getElementById("container-produto").innerHTML += cartaoProduto;
+}
+
+19 PASSO - INSTALAR O TAILWIND
+Rodar no terminal: npm install tailwindcss @tailwindcss/postcss postcss
+Criar o arquivo postcss.config.js, dentro desse arquivo colar o código abaixo:
+
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+};
+
+Criar o arquivo tailwind.config.js, dentro desse arquivo colar o código abaixo:
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ["./src/**/*.{html,js}", "./*.{html,js}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+
+Colar no style.css:
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+Rodar no terminal npm run dev
+
+NÃO USEI O TAIL WIND
+
+20 PASSO - INSTALAR LINK DE ÍCONES
+<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+Digitar no google para procurar os ícones: fontawesome
+
+21 PASSO - CRIAR PASTA SRC PARA ARQUIVOS JS SECUNDÁRIOS
+Dentro dessa pasta criar o arquivo menuCarrinho.js
+
+22 PASSO - FAZER O DEPLOY
+Entrar no git hub e criar o projeto
+Clique em new para criar um repositório (é uma pasta)
+Digitar o nome do repositório
+Em descrição é opcional
+Selecionar repositório público
+Add a readme file = é opcional, é um arquivo de texto que vai ficar na pasta, caso queira anotar algo do projeto
+Depois clique em criar o repositório
+Agora caso não tenha o código criado ainda do projeto, escolha a opção: or create a new repository on the command line. isso serve para sincronizar a pasta do GitHub com a do computador
+
+Digite no terminal git init, precisa importante que o caminho esteja na pasta mãe
+Na pasta .gitignore, deixar só os arquivos node_modules, .env
+Recortar a pasta .gitignore e colar na pasta back-end
+Digite no terminal git add . , precisa importante que o caminho esteja na pasta mãe
+git commit -m "Deploy inicial"
+
+                              
+Criar um packagejson global
+Digite no terminal npm init -y, precisa importante que o caminho esteja na pasta mãe
+Em package.json global, alterar test para build, replicar o comando e colocar start
+E deixar assim:
+  "scripts": {
+    "build": "npm install --prefix back-end && npm install --prefix front-end && npm run build --prefix front-end",
+    "start": "npm run start --prefix back-end"
+  },
+
+Na pasta front-end, verificar se tem a pasta vite.config.js, se não tiver precisa criarCom valia fica assim:
+// vite.config.js
+export default {
+  build: {
+    target: "esnext", // ou pelo menos 'es2022'
+  },
+};
+
+Se for react, assistir a aula 8 em 21:11 faltando para terminar
+
+Rodar npm run buid, se der certo vai criar a pasta dist
+
+No package.json da pasta back-end, deixar o script assim:
+ "scripts": {
+    "start": "node --watch api/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+Rodar npm run start
+
+No arquivo server deixar assim, colopcar api:
+// CONECTANDO O EXPRESS AO BANCO DE DADOS
+app.use("/api/carrinho", rotasCarrinho);
+app.use("/api/clientes", rotasClientes);
+app.use("/api/mudas", rotasMudas);
+app.use("/api/pedidos", rotasPedidos);
+app.use("/api/entregas", rotasEntregas);
+
+Na aula 8 Voltar em 18:18 faltando para terminar
+
+Em server.js, colocar esse código em penúltimo lugar:
+app.use(express.static("../../front-end/dist"));
+app.get("*", async (request, response) => {
+  response.sendFile("../../front-end/dist/index.html");
+});
+
+
+Na pasta vite.config.js
+
+// Instalar npm install --save-dev glob, para trabalhar com as páginas mútiplas
+// Colocar o código abaixo para conseguir acessar os caminhos corretos das páginas
+
+import { defineConfig } from 'vite';
+import { resolve } from 'path';
+import { sync } from 'glob';
+
+import { defineConfig } from "vite";
+import { resolve } from "path";
+import { sync } from "glob";
+
+export default defineConfig({
+  base: "./",
+  build: {
+    target: "esnext",
+    rollupOptions: {
+      input: sync("./src/pages/**/*.html").reduce((entries, file) => {
+        const name = file
+          .replace(/^\.\/src\/pages\//, "")
+          .replace(/\.html$/, "");
+        entries[name] = resolve(__dirname, file);
+        return entries;
+      }, {}),
+    },
+  },
+});
+
+No package.json do front-end, colocar "glob": "^X.Y.Z" em devDependencies e dependencies
+  "devDependencies": {
+    "vite": "^6.3.5",
+    "glob": "^11.0.2" // esse número é a versão do glob
+  },
+  "dependencies": {
+    "viveirolimeira": "file:..",
+    "glob": "^11.0.2" // esse número é a versão do glob
+  }
+
+Digite no terminal: npm i path,  precisa que o caminho esteja na pasta back-end
+Na pasta back-end criar o arquivo test.js
+Com os códigos
+import path, { dirname } from "path";
+
+const __dirname = path.resolve();
+console.log(__dirname);
+
+E roda node ./test.js
+Vai dá a pasta que está executando: C:\Users\Daniel\Documents\Software\ViveiroLimeira\back-end
+
+Depois colocar a pasta test dentro de api e rodar: node .\api\test.js
+Vai dá a pasta que está executando: C:\Users\Daniel\Documents\Software\ViveiroLimeira\back-end
+
+Pode recortar o conteúdo do arquivo test e colar no arquivo server.js
+import path, { dirname } from "path";
+
+const __dirname = path.resolve();
+
+Alterar tambám o app.use(express.static(path.join(__dirname, "../../front-end/dist")));
+Alterar tambám app.get("*", async (request, response) => {
+  response.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
+});
+
+import "dotenv/config";
+import pool from "./connect.js";
+import express from "express";
+import cors from "cors";
+import rotasClientes from "../rotas/rotasClientes.js";
+import rotasCarrinho from "../rotas/rotasCarrinho.js";
+import rotasMudas from "../rotas/rotasMudas.js";
+import rotasPedidos from "../rotas/rotasPedidos.js";
+import rotasEntregas from "../rotas/rotasEntregas.js";
+import path, { dirname } from "path";
+
+const __dirname = path.resolve();
+
+// CRIAR A API - Conectar o Express ao Banco de dados
+const PORTA = 3000;
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+// CONECTANDO O EXPRESS AO BANCO DE DADOS
+app.use("/carrinho", rotasCarrinho);
+app.use("/clientes", rotasClientes);
+app.use("/mudas", rotasMudas);
+app.use("/pedidos", rotasPedidos);
+app.use("/entregas", rotasEntregas);
+
+app.use(express.static(path.join(__dirname, "../../front-end/dist")));
+app.get("*", async (request, response) => {
+  response.sendFile(path.join(__dirname, "../../front-end/dist/index.html"));
+});
+
+app.listen(PORTA, () => {
+  console.log(`API está online, na PORTA ${PORTA}!!!`);
+});
+
+
+Agora rodar npm run build, precisa estar na pasta mãe
+Agora rodar npm run start, precisa estar na pasta mãe
+
+Rodar git add . , precisa estar na pasta mãe
+
+
+No deploy,
+Colocar
+Build Command npm run build
+Start Command npm run start
+Environment Variables não colocar nada
+
+Cadastrar o banco de dados no Render
+Vá em dashboard
+Em new, clique e postgres
+
+Coloque o nome do banco de dados
+Clicar em Free
+Deixar os outros campos como estão
+Clicar em database
+Vá em dashboard
+Clicar no banco e dados
+Clicar em connect
+Copiar o caminho
+postgresql://viveirolimeira_user:HH73wLSYoxZAbyROuUhSF85Cy80ZdMQ8@dpg-d10r7qq4d50c73b3o320-a/viveirolimeira
+Vá em dashboard
+Clique no projeto
+Crie uma variável de ambiente
+Key: DATABASE_URL                        Valor: postgresql://viveirolimeira_user:HH73wLSYoxZAbyROuUhSF85Cy80ZdMQ8@dpg-d10r7qq4d50c73b3o320-a/viveirolimeira
+Clique em salvar
+No arquivo connect do backend, cole o código abaixo:
+import pkg from 'pg';
+const { Pool } = pkg;
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+export default pool;
+
+
+
+
+
+// CRIAR A API - Conectar o Express ao Banco de dados
+const PORTA = 3000;
+const app = express();
+
+
+
+ cada linha de comando da opção: ou envie um repositório existente a partir da linha de comando
+# Na linha de comnado git add README.md, cole ela e execute e depois cole ela com o nome do arquivo js criado: git add index.js
+# git remote add origin https://github.com/dvs78/"Nome do projeto".git, é o momento de conectar o arquivo local com remoto
+# Clique em Sign in with your broswer
+# Depois clique em autorizar ecossistema git
+# Depois atualize a página do repositório, que os arquivos estarão lá
+
+Colocar o nome
+Selecionar público
+Clicar em criar o  repositório
+
+
+Subir ViveiroLimeira do VS para GitHub, digite no terminal:
+git init
+git add .
+git commit -m "Deploy inicial"
+git remote add origin https://github.com/dvs78/ViveiroLimeira.git
+git push -u origin master
+
+Depois clique em: Sign in with your broswer
+
+
+
+
+Entrar no RENDER 
+criei um projeto ViveiroLimeira com javasript, nodejs, postgreSQL e gostaria de fazer o deploy, pode me ajudar?
+Frontend: tem frontend HTML/CSS/JavaScript
+Banco de dados PostgreSQL: Está localmente
+Render
+
+20 PASSO - IMPORTAR npm install body-parser
+npm install body-parser
+
+14 PASSO - FAZER UMA REQUISIÇÃO DO BANCO DE DADOS
+Criar o arquivo script.js e colar o código:
+fetch("http://localhost:3000/users")
+  .then((response) => response.json()) // Converte para JSON
+  .then((data) => console.log(data)) // Exibe os dados no console
+  .catch((error) => console.error("Erro ao buscar os posts:", error));
