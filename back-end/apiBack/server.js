@@ -17,7 +17,7 @@
 //   console.log(`API está online, na porta ${PORTA}!!!`);
 // });
 
-import "dotenv/config";
+// import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import rotasClientes from "../crud/rotas/rotasClientes.js";

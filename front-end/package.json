@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "deploy": "file:..",
-    "dotenv": "^16.5.0"
+    "deploy": "file:.."
   }
 }
