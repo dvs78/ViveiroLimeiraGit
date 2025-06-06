@@ -6,11 +6,6 @@ import {
 } from "../src/components/cartaoProduto.js";
 import { inicializarCarrinho } from "../src/components/menuCarrinho.js";
 
-import { initRouter } from "./router.js";
-
-// inicia o roteador ao carregar
-initRouter();
-
 // RENDERIZAR CATÁLOGO
 renderizarCatalogo(catalogo, containerCartoes);
 
@@ -23,35 +18,44 @@ inicializarCarrinho();
 //   // chame função que carrega o conteúdo dinamicamente
 // });
 
-document.getElementById("link-mudas").addEventListener("click", (e) => {
-  e.preventDefault(); // impede o carregamento padrão
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.addEventListener("click", async (e) => {
+    if (e.target.closest("a[data-link]")) {
+      e.preventDefault();
+      const link = e.target.closest("a");
+      const path = link.getAttribute("href");
+      history.pushState({}, "", path);
+      await carregarPagina(path);
+    }
+  });
 
-  // atualiza a URL
-  window.history.pushState({}, "", "/mudas");
-
-  // carrega dinamicamente o conteúdo de mudas.html
-  carregarPagina("src/pages/mudas.html");
+  // carregar a página correta ao recarregar ou navegar direto
+  carregarPagina(location.pathname);
 });
 
-async function carregarPagina(caminho) {
-  try {
-    const response = await fetch(caminho);
-    const html = await response.text();
+// função para carregar conteúdo dinamicamente
+async function carregarPagina(path) {
+  const main = document.querySelector("main");
 
-    // insere o HTML em um elemento da página (ex: <main>)
-    document.getElementById("conteudo-principal").innerHTML = html;
-  } catch (erro) {
-    console.error("Erro ao carregar a página:", erro);
-    document.getElementById("conteudo-principal").innerHTML =
-      "<p>Erro ao carregar conteúdo.</p>";
+  let arquivo = "";
+  switch (path) {
+    case "/mudas":
+      arquivo = "./src/pages/mudas.html";
+      break;
+    case "/entregas":
+      arquivo = "./src/pages/entregas.html";
+      break;
+    case "/pedidos":
+      arquivo = "./src/pages/pedidos.html";
+      break;
+    case "/clientes":
+      arquivo = "./src/pages/clientes.html";
+      break;
+    default:
+      arquivo = "./src/pages/mudas.html"; // ou uma página 404
   }
+
+  const resposta = await fetch(arquivo);
+  const html = await resposta.text();
+  main.innerHTML = html;
 }
-
-window.addEventListener("popstate", () => {
-  const caminho = window.location.pathname;
-
-  if (caminho === "/mudas") {
-    carregarPagina("src/pages/mudas.html");
-  }
-  // você pode expandir isso para outras rotas
-});

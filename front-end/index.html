@@ -44,20 +44,20 @@
       <div>
         <!-- <p id="filtro-mudas-cadastradas"> -->
 
-        <a href="./src/pages/entregas.html"
+        <!-- <a href="./src/pages/entregas.html"
           ><i class="fa-solid fa-truck"></i
         ></a>
         <a href="./src/pages/pedidos.html"><i class="fa-solid fa-book"></i></a>
-        <a href="/mudas" id="link-mudas">
-          <i class="fa-solid fa-seedling"></i>
-        </a>
-
-        <!-- <a href="./src/pages/mudas.html"
+        <a href="./src/pages/mudas.html"
           ><i class="fa-solid fa-seedling"></i
-        ></a> -->
-        <a id="index-icone-cliente">
+        ></a>
+        <a href="./src/pages/clientes.html">
           <i class="fa-solid fa-user"></i>
-        </a>
+        </a> -->
+        <a href="/mudas" data-link><i class="fa-solid fa-seedling"></i></a>
+        <a href="/entregas" data-link><i class="fa-solid fa-truck"></i></a>
+        <a href="/pedidos" data-link><i class="fa-solid fa-book"></i></a>
+        <a href="/clientes" data-link><i class="fa-solid fa-user"></i></a>
 
         <button id="abrir-carrinho">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -101,15 +101,7 @@
       <i id="icone-fechar-filtro" class="fa-regular fa-circle-xmark"></i>
     </article>
 
-    <nav>
-      <a href="/clientes" data-route>Clientes</a>
-      <a href="/mudas" data-route>Mudas</a>
-      <a href="/pedidos" data-route>Pedidos</a>
-    </nav>
-
-    <script type="module" src="/src/main.js"></script>
-
-    <main id="conteudo-principal" class="main-index">
+    <main class="main-index">
       <!-- aqui será carregado o conteúdo de outras páginas -->
 
       <section class="mudas-cartoes">
