@@ -1,5 +1,8 @@
-// const BASE_URL = "https://viveirolimeiragit.onrender.com/api";
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000/api"
+    : "https://viveirolimeiragit.onrender.com/api";
+
 // const { NODE_ENV } = process.env;
 // const BASE_URL =
 //   NODE_ENV === "development" ? "http://localhost:3000/api" : "/api";
